@@ -9,8 +9,7 @@ using Microsoft.AspNet.Mvc;
 using Microsoft.Extensions.OptionsModel;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Linq;
 
 namespace GraphApiAppOnlyWebApiSample.Controllers
 {
@@ -28,8 +27,6 @@ namespace GraphApiAppOnlyWebApiSample.Controllers
         private ClientCredential _credential;
         private string _graphUrl;
         private string _version;
-
-        private JsonSerializerSettings _settings;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OrganisationController"/> class.
@@ -68,7 +65,7 @@ namespace GraphApiAppOnlyWebApiSample.Controllers
 
                     var resultAsString = await client.GetStringAsync(url);
 
-                    var organisation = JsonConvert.DeserializeObject<Organisation>(resultAsString, this._settings);
+                    var organisation = JObject.Parse(resultAsString);
                     var result = new JsonResult(organisation);
                     return result;
                 }
@@ -95,13 +92,6 @@ namespace GraphApiAppOnlyWebApiSample.Controllers
 
             this._graphUrl = this._graphApp.GraphUrl;
             this._version = this._graphApp.Version;
-
-            this._settings = new JsonSerializerSettings
-                                 {
-                                     ContractResolver = new CamelCasePropertyNamesContractResolver(),
-                                     NullValueHandling = NullValueHandling.Ignore,
-                                     MissingMemberHandling = MissingMemberHandling.Ignore
-                                 };
         }
     }
 }
