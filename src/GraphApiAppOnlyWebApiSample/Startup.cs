@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNet.Builder;
+﻿using GraphApiAppOnlyWebApiSample.Models;
+
+using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,6 +27,9 @@ namespace GraphApiAppOnlyWebApiSample
         {
             // Add framework services.
             services.AddMvc();
+
+            // Add app settings.
+            services.Configure<GraphApp>(this.Configuration.GetSection("GraphApp"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
