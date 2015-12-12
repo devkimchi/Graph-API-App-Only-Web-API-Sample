@@ -1,14 +1,14 @@
 <StyleCopSettings Version="105">
   <GlobalSettings>
     <CollectionProperty Name="RecognizedWords">
-      <Value>commandline</Value>
       <Value>filepath</Value>
-      <Value>postpath</Value>
-      <Value>dest</Value>
-      <Value>str</Value>
-      <Value>uowm</Value>
       <Value>startup</Value>
       <Value>fwlink</Value>
+      <Value>eg</Value>
+      <Value>contoso</Value>
+      <Value>onmicrosoft</Value>
+      <Value>microsoftonline</Value>
+      <Value>auth</Value>
     </CollectionProperty>
     <StringProperty Name="Culture">en-GB</StringProperty>
   </GlobalSettings>
