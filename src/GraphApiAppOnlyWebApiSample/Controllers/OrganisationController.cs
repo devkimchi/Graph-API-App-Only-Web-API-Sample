@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using GraphApiAppOnlyWebApiSample.Models;
 
 using Microsoft.AspNet.Mvc;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.OptionsModel;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 
 using Newtonsoft.Json;
@@ -22,6 +22,8 @@ namespace GraphApiAppOnlyWebApiSample.Controllers
     {
         private const string Organisation = "organization";
 
+        private readonly GraphApp _graphApp;
+
         private AuthenticationContext _authContext;
         private ClientCredential _credential;
         private string _graphUrl;
@@ -32,8 +34,9 @@ namespace GraphApiAppOnlyWebApiSample.Controllers
         /// <summary>
         /// Initializes a new instance of the <see cref="OrganisationController"/> class.
         /// </summary>
-        public OrganisationController()
+        public OrganisationController(IOptions<GraphApp> graphApp)
         {
+            this._graphApp = graphApp.Value;
             this.Init();
         }
 
@@ -77,33 +80,21 @@ namespace GraphApiAppOnlyWebApiSample.Controllers
             }
         }
 
-        private static GraphApp GetAppSettings()
-        {
-            var builder = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json")
-                .AddEnvironmentVariables();
-
-            var appSettings = builder.Build().Get<AppSettings>();
-            return appSettings?.GraphApp;
-        }
-
         private void Init()
         {
-            var graphApp = GetAppSettings();
-
-            var tenant = graphApp.Tenant;
-            var authUrl = graphApp.AuthUrl;
+            var tenant = this._graphApp.Tenant;
+            var authUrl = this._graphApp.AuthUrl;
             var authority = string.Format(authUrl, tenant);
 
             this._authContext = new AuthenticationContext(authority);
 
-            var clientId = graphApp.ClientId;
-            var clientSecret = graphApp.ClientSecret;
+            var clientId = this._graphApp.ClientId;
+            var clientSecret = this._graphApp.ClientSecret;
 
             this._credential = new ClientCredential(clientId, clientSecret);
 
-            this._graphUrl = graphApp.GraphUrl;
-            this._version = graphApp.Version;
+            this._graphUrl = this._graphApp.GraphUrl;
+            this._version = this._graphApp.Version;
 
             this._settings = new JsonSerializerSettings
                                  {
