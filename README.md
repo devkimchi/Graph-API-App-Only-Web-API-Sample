@@ -29,24 +29,24 @@ Create and register a new application to AAD so that the sample Web API app can 
 
 #### Step 1 &ndash; Create Application to AAD ####
 
-1. Login to [Azure Management Portal](https://manage.windowsazure.com).
-2. Select Active Directory.
+* Login to [Azure Management Portal](https://manage.windowsazure.com).
+* Select Active Directory.
 
 ![](./images/graph-api-app-only-sample-01.png)
 
-3. Create a new application.
+* Create a new application.
 
 ![](./images/graph-api-app-only-sample-02.png)
 
-4. Choose the `Add an application my organization is developing` option.
+* Choose the `Add an application my organization is developing` option.
 
 ![](./images/graph-api-app-only-sample-03.png)
 
-5. Enter the application name like `Graph API App-only Sample` and select the `Web Application and/or Web API` option. 
+* Enter the application name like `Graph API App-only Sample` and select the `Web Application and/or Web API` option. 
 
 ![](./images/graph-api-app-only-sample-04.png)
 
-6. Enter `https://[tenant-name]/GraphApiAppOnlySample` for both fields. `[tenant-name]` should look like `contoso.onmicrosoft.com`. Please note that both won't be used at all.
+* Enter `https://[tenant-name]/GraphApiAppOnlySample` for both fields. `[tenant-name]` should look like `contoso.onmicrosoft.com`. Please note that both won't be used at all.
 
 ![](./images/graph-api-app-only-sample-05.png)
 
@@ -55,27 +55,27 @@ Now the app has been created.
 
 #### Step 2 &ndash; Configure Application ####
 
-1. Once the app is created, click the `configure` tab.
+* Once the app is created, click the `configure` tab.
 
 ![](./images/graph-api-app-only-sample-06.png)
 
-2. Get the `Client ID`.
+* Get the `Client ID`.
 
 ![](./images/graph-api-app-only-sample-07.png)
 
-3. Get the secret key. Note that the key is only displayed once after click the `Save` button at the bottom.
+* Get the secret key. Note that the key is only displayed once after click the `Save` button at the bottom.
 
 ![](./images/graph-api-app-only-sample-08.png)
 
-4. Give AAD all delegated permissions of 8. Make sure that, in the production app, appropriate number of delegated permissions **MUST** be given to avoid any security breach.
+* Give AAD all delegated permissions of 8. Make sure that, in the production app, appropriate number of delegated permissions **MUST** be given to avoid any security breach.
 
 ![](./images/graph-api-app-only-sample-09.png)
 
-5. Add another application called `Microsoft Graph`
+* Add another application called `Microsoft Graph`
 
 ![](./images/graph-api-app-only-sample-10.png)
 
-6. Give `Microsoft Graph` all application permissions of 14 and delegated permissions of 33. Make sure that, in the production app, appropriate number of application permissions and delegated permissions **MUST** be given to avoid any security breach.
+* Give `Microsoft Graph` all application permissions of 14 and delegated permissions of 33. Make sure that, in the production app, appropriate number of application permissions and delegated permissions **MUST** be given to avoid any security breach.
 
 ![](./images/graph-api-app-only-sample-11.png)
 
