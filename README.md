@@ -1,6 +1,6 @@
 # Graph API App-Only Web API Sample #
 
-This provides Web API samples built in ASP.NET 5 and ASP.NET MVC 6 using Graph API, registered as an App-only application.
+This provides Web API samples built-in ASP.NET 5 and ASP.NET MVC 6 using Graph API, registered as an App-only application.
 
 > This requires [Visual Studio 2015](https://www.visualstudio.com).
 
@@ -67,17 +67,15 @@ Now the app has been created.
 
 ![](./images/graph-api-app-only-sample-08.png)
 
-* Give AAD all delegated permissions of 8. Make sure that, in the production app, appropriate number of delegated permissions **MUST** be given to avoid any security breach.
-
-![](./images/graph-api-app-only-sample-09.png)
-
 * Add another application called `Microsoft Graph`
 
 ![](./images/graph-api-app-only-sample-10.png)
 
-* Give `Microsoft Graph` all application permissions of 14 and delegated permissions of 33. Make sure that, in the production app, appropriate number of application permissions and delegated permissions **MUST** be given to avoid any security breach.
+* Give "Read directory data" permission to `Microsoft Graph`, as this permission is only necessary to run the sample app.
 
 ![](./images/graph-api-app-only-sample-11.png)
+
+> **ATTENTION**: In the production environment, appropriate number of application permissions **MUST** be given to avoid any security breach.
 
 The app has been configured.
 
@@ -88,14 +86,7 @@ As the app has been registered and configured, the sample Web API app should be 
 
 ```
 {
-  "Logging": {
-    "IncludeScopes": false,
-    "LogLevel": {
-      "Default": "Verbose",
-      "System": "Information",
-      "Microsoft": "Information"
-    }
-  },
+  ...
   "GraphApp": {
     "Tenant": "contoso.onmicrosoft.com",
     "AuthUrl": "https://login.microsoftonline.com/{0}",
@@ -118,9 +109,14 @@ Then change values:
 
 ### Trust IIS or IIS Express with a Self-signed Certificate ###
 
-> You can skip this setp, if you already have a self-signed certificate on your root certificate storage.
+> * You can skip this step, if you intend to publish this app to Azure.
+> * You can skip this step, if you already have a self-signed certificate on your root certificate storage.
 
-All communications with AAD and Graph API are performed through a secure channel (SSL/TLS), this sample app **MUST** be signed with a root certificate. However, this is a developer's local environment, so a self-signed certificate should be issued and stored as a root certificate. The following steps show how to register self-signed certificate to the root certificate store using PowerShell.
+All communications with AAD and Graph API are performed through a secure channel (SSL/TLS), this sample app **MUST** be signed with a root certificate. However, this is a developer's local environment, so a self-signed certificate should be issued and stored as a root certificate. If you don't store the self-signed certificate, you'll see the following message popped up when you run VS2015.
+
+![](./images/graph-api-app-only-sample-12.png)
+
+The following steps show how to register self-signed certificate to the root certificate store using PowerShell.
 
 
 #### Step 1 &ndash; Check Self-signed Certificate ####
